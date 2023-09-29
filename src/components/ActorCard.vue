@@ -3,7 +3,7 @@ defineProps(['actor'])
 </script>
 
 <template>
-  <div class="movie-card" v-if="actor">
+  <div class="actor-card" v-if="actor">
     <p><span>Prénom :</span> {{actor.firstName}}</p>
     <p><span>Nom :</span> {{actor.lastName}}</p>
 
@@ -17,11 +17,12 @@ defineProps(['actor'])
         </li>
       </ul>
     </div>
+    <router-link  :to="{name: 'actors-info', params: {id: actor.id}}">Voir la fiche de détails de l'acteur</router-link>
   </div>
 </template>
 
 <style scoped>
-.movie-card{
+.actor-card{
   border: 1px solid black;
   border-radius: 5px;
   padding: 10px;

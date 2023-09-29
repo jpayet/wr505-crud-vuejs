@@ -7,7 +7,7 @@ defineProps(['movie'])
     <h3>{{movie.title}}</h3>
     <p><span>Synopsis :</span> {{movie.description}}</p>
     <p><span>Date de sortie :</span> {{movie.releaseDate}}</p>
-    <p><span>Durée :</span> {{movie.duration}}</p>
+    <p><span>Durée :</span> {{movie.duration}}m</p>
 
     <p><span>Genre :</span> {{movie.category.name}}</p>
 

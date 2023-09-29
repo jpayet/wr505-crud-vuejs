@@ -13,8 +13,10 @@ defineProps(['movie'])
 
     <div class="actors">
       <h4>Acteurs</h4>
-      <ul>
-        <li v-for="actor in movie.actor">{{actor.firstName}} {{actor.lastName}}</li>
+      <ul v-for="actor in movie.actor">
+        <li>
+          <router-link  :to="{name: 'actors-info', params: {id: actor.id}}">{{actor.firstName}} {{actor.lastName}}</router-link>
+        </li>
       </ul>
     </div>
   </div>

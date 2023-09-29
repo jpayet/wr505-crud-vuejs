@@ -19,6 +19,9 @@ defineProps(['movie'])
         </li>
       </ul>
     </div>
+
+    <router-link  :to="{name: 'movies-info', params: {id: movie.id}}">Voir la fiche de détails du film</router-link>
+
   </div>
 </template>
 

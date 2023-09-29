@@ -11,6 +11,10 @@
       <router-link to="/categories">Categories</router-link>
     </nav>
   </header>
+
+  <h1>Accueil</h1>
+
+  <RouterView />
 </template>
 
 <style scoped>

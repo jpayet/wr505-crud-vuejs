@@ -12,7 +12,7 @@
     completeList.value = data.value
   })
 
-  function filterOnName() {
+  function filterOnMovieName() {
     data.value = completeList.value['hydra:member'].filter(function(data){
       return data.title.toLowerCase().includes(searchword.value.toLowerCase())
     })
@@ -24,7 +24,7 @@
     <h2>Liste des films</h2>
 
     <div class="search-box">
-      <input class="searchform" type="text" v-model.trim="searchword" @input="filterOnName" placeholder="Rechercher un film" />
+      <input class="searchform" type="text" v-model.trim="searchword" @input="filterOnMovieName" placeholder="Rechercher un film" />
     </div>
     <div class="movies-box">
       <MovieCard v-if="data" v-for="movie in data['hydra:member'] || data" :movie="movie" />

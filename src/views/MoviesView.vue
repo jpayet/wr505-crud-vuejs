@@ -10,17 +10,12 @@
     const response = await fetch('http://localhost:8088/wra506/index.php/api/movies')
     data.value = await response.json()
     completeList.value = data.value
-    console.log(data.value)
-    console.log(completeList.value)
   })
 
   function filterOnName() {
-    console.log(data.value)
     data.value = completeList.value['hydra:member'].filter(function(data){
       return data.title.toLowerCase().includes(searchword.value.toLowerCase())
     })
-    console.log(searchword.value)
-    console.log(data.value)
   }
 </script>
 

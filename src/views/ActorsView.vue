@@ -15,7 +15,7 @@ onMounted(async () => {
 
 function filterOnActorName() {
   data.value = completeList.value['hydra:member'].filter(function(data){
-    return data.lastName.toLowerCase().includes(searchword.value.toLowerCase())
+    return data.lastName.toLowerCase().includes(searchword.value.toLowerCase()) || data.firstName.toLowerCase().includes(searchword.value.toLowerCase())
   })
 }
 </script>

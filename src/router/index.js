@@ -7,6 +7,7 @@ import CategoriesView from '../views/CategoriesView.vue'
 
 import MoviesInfoView from '../views/MoviesInfoView.vue'
 import ActorsInfoView from '../views/ActorsInfoView.vue'
+import LoginView from '../views/LoginView.vue'
 
 
 const router = createRouter({
@@ -41,6 +42,11 @@ const router = createRouter({
       path: '/categories',
       name: 'categories',
       component: CategoriesView
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView
     },
   ]
 })

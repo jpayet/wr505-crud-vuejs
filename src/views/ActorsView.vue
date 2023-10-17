@@ -1,23 +1,38 @@
 <script setup>
-import {onMounted, ref} from 'vue'
-import ActorCard from "../components/ActorCard.vue"
-import MovieCard from "@/components/MovieCard.vue";
+  import {onMounted, ref} from 'vue'
+  import ActorCard from "../components/ActorCard.vue"
+  import MovieCard from "@/components/MovieCard.vue";
+  import router from "@/router";
 
-let data = ref()
-let completeList = ref()
-let searchword = ref('')
+  let data = ref()
+  let completeList = ref()
+  let searchword = ref('')
+  const token = localStorage.getItem('token')
 
-onMounted(async () => {
-  const response = await fetch('http://localhost:8088/wra506/index.php/api/actors')
-  data.value = await response.json()
-  completeList.value = data.value
-})
-
-function filterOnActorName() {
-  data.value = completeList.value['hydra:member'].filter(function(data){
-    return data.lastName.toLowerCase().includes(searchword.value.toLowerCase()) || data.firstName.toLowerCase().includes(searchword.value.toLowerCase())
+  onMounted(async () => {
+    fetch('http://localhost:8088/wra506/api/actors', {
+      headers: {
+        'Authorization': 'Bearer ' + token,
+      }
+    })
+        .then(response => {
+          if (response.status === 401) {
+            router.push({name: 'login'})
+          } else {
+            return response.json()
+          }
+        })
+        .then(datas => {
+          data.value = datas
+          completeList.value = datas
+        });
   })
-}
+
+  function filterOnActorName() {
+    data.value = completeList.value['hydra:member'].filter(function(data){
+      return data.lastName.toLowerCase().includes(searchword.value.toLowerCase()) || data.firstName.toLowerCase().includes(searchword.value.toLowerCase())
+    })
+  }
 </script>
 
 <template>

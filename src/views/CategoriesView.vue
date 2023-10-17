@@ -1,22 +1,37 @@
 <script setup>
-import {onMounted, ref} from 'vue'
-import CategoryCard from "../components/CategoryCard.vue";
+  import {onMounted, ref} from 'vue'
+  import CategoryCard from "../components/CategoryCard.vue";
+  import router from "@/router";
 
-let data = ref()
-let completeList = ref()
-let searchword = ref('')
+  let data = ref()
+  let completeList = ref()
+  let searchword = ref('')
+  const token = localStorage.getItem('token')
 
-onMounted(async () => {
-  const response = await fetch('http://localhost:8088/wra506/index.php/api/categories')
-  data.value = await response.json()
-  completeList.value = data.value
-})
-
-function filterOnCategoryName() {
-  data.value = completeList.value['hydra:member'].filter(function(data){
-    return data.name.toLowerCase().includes(searchword.value.toLowerCase())
+  onMounted(async () => {
+    fetch('http://localhost:8088/wra506/api/categories', {
+      headers: {
+        'Authorization': 'Bearer ' + token,
+      }
+    })
+        .then(response => {
+          if (response.status === 401) {
+            router.push({name: 'login'})
+          } else {
+            return response.json()
+          }
+        })
+        .then(datas => {
+          data.value = datas
+          completeList.value = datas
+        });
   })
-}
+
+  function filterOnCategoryName() {
+    data.value = completeList.value['hydra:member'].filter(function(data){
+      return data.name.toLowerCase().includes(searchword.value.toLowerCase())
+    })
+  }
 
 </script>
 

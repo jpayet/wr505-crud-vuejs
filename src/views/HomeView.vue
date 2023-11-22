@@ -15,9 +15,11 @@ onMounted(async () => {
       'Authorization': 'Bearer ' + token,
     }
   })
-      .then(response => response.json())
+      .then(response => {return response.json()})
       .then(data => {
-        data_movies.value = data['hydra:member'].sort(() => Math.random() - Math.random()).slice(0, 4)
+        if (data.code != 401) {
+          data_movies.value = data['hydra:member'].sort(() => Math.random() - Math.random()).slice(0, 4)
+        }
       });
 
 
@@ -28,7 +30,9 @@ onMounted(async () => {
   })
       .then(response => response.json())
       .then(data => {
-        data_actors.value = data['hydra:member'].sort(() => Math.random() - Math.random()).slice(0, 4)
+        if (data.code != 401){
+          data_actors.value = data['hydra:member'].sort(() => Math.random() - Math.random()).slice(0, 4)
+        }
       });
 })
 

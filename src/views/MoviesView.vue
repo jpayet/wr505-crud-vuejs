@@ -10,22 +10,22 @@
   const token = localStorage.getItem('token')
 
   onMounted(async () => {
-    fetch('http://localhost:8088/wra506/api/movies?page='+ currentPage.value, {
+    fetch('http://localhost:8088/wra506/api/movies?page=' + currentPage.value, {
       headers: {
         'Authorization': 'Bearer ' + token,
       }
     })
-        .then(response => {
-          if (response.status === 401) {
-            router.push({name: 'login'})
-          } else {
-            return response.json()
-          }
-        })
-        .then(datas => {
+      .then(response => {return response.json()})
+      .then(datas => {
+        if(datas.code===401){
+          localStorage.setItem('error', datas.message)
+          localStorage.removeItem('token')
+          router.push({name: 'login'})
+        } else {
           data.value = datas
           completeList.value = datas
-        });
+        }
+      });
   })
 
   function filterOnMovieName() {
@@ -56,17 +56,17 @@
 </template>
 
 <style scoped>
-.search-box{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px;
-}
-.searchform{
-  width: 40vw;
-  border-radius: 20px;
-  padding: 10px
-;
-}
+  .search-box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+  }
+  .searchform{
+    width: 40vw;
+    border-radius: 20px;
+    padding: 10px
+  ;
+  }
 </style>

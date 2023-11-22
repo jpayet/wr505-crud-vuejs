@@ -5,6 +5,9 @@ import {ref} from "vue";
 let email = ref()
 let password = ref()
 
+
+let error = localStorage.getItem('error')
+
 const login = () => {
   fetch('http://localhost:8088/wra506/api/login_check', {
     method: 'POST',
@@ -32,16 +35,20 @@ const login = () => {
 
 <template>
   <h1>Connexion</h1>
-  <div>
+
+  <div class="card" style="width: 18rem">
     <div>
-      <label for="email">Email</label>
-      <input type="email" id="email" v-model="email" class="border-b">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" id="email" v-model="email" class="form-control mb10">
     </div>
     <div>
-      <label for="password">Mot de passe</label>
-      <input type="password" id="password" v-model="password" @keyup.enter="login" class="border-b">
+      <label for="password" class="form-label">Mot de passe</label>
+      <input type="password" id="password" v-model="password" @keyup.enter="login" class="form-control mb10">
     </div>
-    <button @click="login">Connexion</button>
+    <button @click="login" class="btn btn-primary">Connexion</button>
+  </div>
+  <div v-if="error">
+    <p>{{error}}</p>
   </div>
 </template>
 

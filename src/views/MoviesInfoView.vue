@@ -14,15 +14,15 @@ onMounted(async () => {
       'Authorization': 'Bearer ' + token,
     }
   })
-      .then(response => {
-        if (response.status === 401) {
+      .then(response => {return response.json()})
+      .then(datas => {
+        if(datas.code===401){
+          localStorage.setItem('error', datas.message)
+          localStorage.removeItem('token')
           router.push({name: 'login'})
         } else {
-          return response.json()
+          data.value = datas
         }
-      })
-      .then(datas => {
-        data.value = datas
       });
 })
 </script>

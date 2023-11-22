@@ -7,6 +7,7 @@ import CategoriesView from '../views/CategoriesView.vue'
 
 import MoviesInfoView from '../views/MoviesInfoView.vue'
 import ActorsInfoView from '../views/ActorsInfoView.vue'
+import LoginView from '../views/LoginView.vue'
 
 
 const router = createRouter({
@@ -20,7 +21,10 @@ const router = createRouter({
     {
       path: '/movies',
       name: 'movies',
-      component: MoviesView
+      component: MoviesView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/movies/:id',
@@ -42,7 +46,45 @@ const router = createRouter({
       name: 'categories',
       component: CategoriesView
     },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView
+    },
   ]
 })
+
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.requiresAuth) {
+//     const token = localStorage.getItem('token');
+//     if (token) {
+//       fetch("http://localhost:8088/wra506/api", {
+//         headers: {
+//           'Authorization': 'Bearer ' + token,
+//         }
+//       })
+//           .then(response => response.json())
+//           .then(result => console.log(result))
+//           .catch(error => {
+//             console.log('error', error)
+//             if (error.response.status === 401) {
+//               console.log('error', error)
+//               localStorage.removeItem('token');
+//               next('/login');
+//             } else {
+//               next();
+//             }
+//           });
+//       // User is authenticated, proceed to the route
+//       next();
+//     } else {
+//       // User is not authenticated, redirect to login
+//       next('/login');
+//     }
+//   } else {
+//     // Non-protected route, allow access
+//     next();
+//   }
+// });
 
 export default router

@@ -5,6 +5,7 @@ import {ref} from "vue";
 let email = ref()
 let password = ref()
 
+
 let error = localStorage.getItem('error')
 
 const login = () => {
@@ -34,6 +35,7 @@ const login = () => {
 
 <template>
   <h1>Connexion</h1>
+
   <div class="card" style="width: 18rem">
     <div>
       <label for="email" class="form-label">Email</label>

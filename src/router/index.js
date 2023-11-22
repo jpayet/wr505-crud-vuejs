@@ -20,7 +20,10 @@ const router = createRouter({
     {
       path: '/movies',
       name: 'movies',
-      component: MoviesView
+      component: MoviesView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/movies/:id',
@@ -44,5 +47,38 @@ const router = createRouter({
     },
   ]
 })
+
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.requiresAuth) {
+//     const token = localStorage.getItem('token');
+//     if (token) {
+//       fetch("http://localhost:8088/wra506/api", {
+//         headers: {
+//           'Authorization': 'Bearer ' + token,
+//         }
+//       })
+//           .then(response => response.json())
+//           .then(result => console.log(result))
+//           .catch(error => {
+//             console.log('error', error)
+//             if (error.response.status === 401) {
+//               console.log('error', error)
+//               localStorage.removeItem('token');
+//               next('/login');
+//             } else {
+//               next();
+//             }
+//           });
+//       // User is authenticated, proceed to the route
+//       next();
+//     } else {
+//       // User is not authenticated, redirect to login
+//       next('/login');
+//     }
+//   } else {
+//     // Non-protected route, allow access
+//     next();
+//   }
+// });
 
 export default router

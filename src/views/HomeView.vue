@@ -3,27 +3,45 @@ import MovieCard from "../components/MovieCard.vue"
 import ActorCard from "../components/ActorCard.vue"
 
 import {onMounted, ref} from "vue";
+import router from "@/router";
 
 const data_movies = ref()
 const data_actors = ref()
+const token = localStorage.getItem('token')
 
 onMounted(async () => {
-  const response_movies = await fetch('http://localhost:8088/wra506/index.php/api/movies')
-  const response_actors = await fetch('http://localhost:8088/wra506/index.php/api/actors')
+  fetch('http://localhost:8088/wra506/api/movies', {
+    headers: {
+      'Authorization': 'Bearer ' + token,
+    }
+  })
+      .then(response => {return response.json()})
+      .then(data => {
+        if (data.code != 401) {
+          data_movies.value = data['hydra:member'].sort(() => Math.random() - Math.random()).slice(0, 4)
+        }
+      });
 
-  //MOVIES
-  data_movies.value = await response_movies.json().then((data_movies) => {
-    return data_movies['hydra:member'].sort(() => Math.random() - Math.random()).slice(0, 4)
+
+  fetch('http://localhost:8088/wra506/api/actors', {
+    headers: {
+      'Authorization': 'Bearer ' + token,
+    }
   })
-  //ACTORS
-  data_actors.value = await response_actors.json().then((data_actors) => {
-    return data_actors['hydra:member'].sort(() => Math.random() - Math.random()).slice(0, 4)
-  })
+      .then(response => response.json())
+      .then(data => {
+        if (data.code != 401){
+          data_actors.value = data['hydra:member'].sort(() => Math.random() - Math.random()).slice(0, 4)
+        }
+      });
 })
+
 </script>
 
 <template>
   <main>
+    <h1>Accueil</h1>
+
     <h2>Découvrez nos films</h2>
     <div class="carrousel-movies">
       <MovieCard v-if="data_movies" v-for="movie in data_movies" :movie="movie" />

@@ -1,24 +1,16 @@
 name: Deploy
-
 on: [push]
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
-
-    - name: Deploy on PR merge to main
+    - name: Demo LS on MMI VPS
       uses: appleboy/ssh-action@master
       with:
         HOST: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-        script: |
-          cd public_html/
-          git clone git@github.com:jpayet/wr505-crud-vuejs.git
-          cd wr505-crud-vuejs
-          git pull
-          npm install
+        script : ls

@@ -1,16 +1,25 @@
 name: Deploy
+
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
-    - name: Demo LS on MMI VPS
+
+    - name: Deploy on PR merge to main
       uses: appleboy/ssh-action@master
       with:
         HOST: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-        script : ls
+        script: |
+          cd public_html/
+          git clone git@github.com:jpayet/wra506-symfony.git
+          cd wra506-symfony
+          git pull
+          composer install
+          php bin/console c:c

@@ -1,0 +1,30 @@
+.infobox{
+  width: 285px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+
+  p{
+    margin: 0;
+  }
+}
+
+.infobox_info {
+  @extend .infobox;
+  background-color: $info;
+}
+
+.infobox_error {
+  @extend .infobox;
+  background-color: $error;
+}
+
+.infobox_sucess {
+  @extend .infobox;
+  background-color: $sucess;
+}
+

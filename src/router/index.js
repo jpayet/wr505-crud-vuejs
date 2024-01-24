@@ -34,7 +34,10 @@ const router = createRouter({
     {
       path: '/actors',
       name: 'actos',
-      component: ActorsView
+      component: ActorsView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/actors/:id',
@@ -44,7 +47,10 @@ const router = createRouter({
     {
       path: '/categories',
       name: 'categories',
-      component: CategoriesView
+      component: CategoriesView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/login',
@@ -56,33 +62,15 @@ const router = createRouter({
 
 // router.beforeEach((to, from, next) => {
 //   if (to.meta.requiresAuth) {
+//     // route protégée
 //     const token = localStorage.getItem('token');
-//     if (token) {
-//       fetch("http://localhost:8088/wra506/api", {
-//         headers: {
-//           'Authorization': 'Bearer ' + token,
-//         }
-//       })
-//           .then(response => response.json())
-//           .then(result => console.log(result))
-//           .catch(error => {
-//             console.log('error', error)
-//             if (error.response.status === 401) {
-//               console.log('error', error)
-//               localStorage.removeItem('token');
-//               next('/login');
-//             } else {
-//               next();
-//             }
-//           });
-//       // User is authenticated, proceed to the route
-//       next();
+//     if(!token){
+//       router.push({name: 'login', params: { message: 'eduardo' }})
 //     } else {
-//       // User is not authenticated, redirect to login
-//       next('/login');
+//       next();
 //     }
 //   } else {
-//     // Non-protected route, allow access
+//     // route pas protégée
 //     next();
 //   }
 // });

@@ -66,7 +66,12 @@
   .searchform{
     width: 40vw;
     border-radius: 20px;
-    padding: 10px
-  ;
+    padding: 10px;
+  }
+  .movies-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
   }
 </style>

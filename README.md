@@ -10,7 +10,9 @@ npm run dev
 
 ## Identifiants
 
-Email : user1@gmail.com 
+Email : user1@gmail.com  
+
 Mot de passe : password
+
 Role du profil : Administrateur
 

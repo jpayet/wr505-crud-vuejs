@@ -6,7 +6,8 @@ let email = ref()
 let password = ref()
 
 
-let error = localStorage.getItem('error')
+const error = localStorage.getItem('error')
+localStorage.removeItem('error')
 
 const login = () => {
   fetch('http://localhost:8088/wra506/api/login_check', {
@@ -24,6 +25,7 @@ const login = () => {
       .then(response => response.json())
       .then(data => {
         if (data.token !== undefined) {
+          localStorage.removeItem('error')
           localStorage.setItem('token', data.token)
           location.href = '/'
         } else {

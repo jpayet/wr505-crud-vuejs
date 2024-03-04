@@ -148,12 +148,13 @@ async function deleteMovie(movieId) {
 <template>
   <div class="card" v-if="props.movie">
     <div class="card-body">
-      <img :src="props.movie.Media.contentUrl" alt="Affiche du film" />
+      <div class="media">
+        <img :src="props.movie.Media.contentUrl" alt="Affiche du film" />
+      </div>
       <h3>{{props.movie.title}}</h3>
       <p><span>Synopsis :</span> {{props.movie.description}}</p>
       <p><span>Date de sortie :</span> {{props.movie.releaseDate}}</p>
       <p><span>Durée :</span> {{props.movie.duration}}m</p>
-
       <p><span>Genre :</span> {{props.movie.category.name}}</p>
 
       <div class="actors">
@@ -166,12 +167,14 @@ async function deleteMovie(movieId) {
       </div>
 
       <router-link  :to="{name: 'movies-info', params: {id: props.movie.id}}">Voir la fiche de détails du film</router-link>
-      <div class="edit-box">
-        <button class="btn-edit" @click="toggleDetails(props.movie.id)">Edit</button>
+
+      <div class="form-action">
+        <button class="btn btn-edit" @click="toggleDetails(props.movie.id)">Editer</button>
+        <button class="btn btn-delete" @click="deleteMovie(props.movie.id)">Supprimer</button>
+
       </div>
 
       <div :class="[{ 'd-none': !selectedMovieId }]">
-        <h2 v-if="selectedMovie">{{ selectedMovie.title }}</h2>
         <form @submit.prevent="updateMovie">
           <div class="form-group">
             <label for="editMovieTitle">Titre du film :</label>
@@ -221,11 +224,6 @@ async function deleteMovie(movieId) {
           <button type="submit" class="btn btn-primary">Modifier</button>
         </form>
       </div>
-
-      <div class="delete-box">
-        <button class="btn-delete" @click="deleteMovie(props.movie.id)">Supprimer</button>
-      </div>
-
     </div>
   </div>
 </template>

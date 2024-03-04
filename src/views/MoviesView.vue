@@ -12,7 +12,7 @@
     const token = localStorage.getItem('token')
 
     onMounted(async () => {
-      fetch('http://localhost:8088/wra506/api/movies?page=' + currentPage.value, {
+      fetch('https://movieapi.jean-francoispayet.fr/api/movies?page=' + currentPage.value, {
         headers: {
           'Authorization': 'Bearer ' + token,
         }
@@ -81,6 +81,8 @@
   <template>
     <main>
       <h2>Liste des films</h2>
+
+      <button class="btn-orange" @click="router.push('/add-movie')">Ajouter un film</button>
 
       <div class="search-box">
         <input class="searchform" type="text" v-model.trim="searchword" @input="filterOnMovieName" placeholder="Rechercher un film" />

@@ -10,7 +10,7 @@ const error = localStorage.getItem('error')
 localStorage.removeItem('error')
 
 const login = () => {
-  fetch('http://localhost:8088/wra506/api/login_check', {
+  fetch('https://movieapi.jean-francoispayet.fr/api/login_check', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

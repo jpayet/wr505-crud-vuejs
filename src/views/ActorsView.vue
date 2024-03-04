@@ -10,7 +10,7 @@
   const token = localStorage.getItem('token')
 
   onMounted(async () => {
-    fetch('http://localhost:8088/wra506/api/actors', {
+    fetch('https://movieapi.jean-francoispayet.fr/api/actors', {
       headers: {
         'Authorization': 'Bearer ' + token,
       }

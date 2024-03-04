@@ -5,7 +5,7 @@ const props = defineProps(['movie'])
 
 import router from "@/router";
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8088/wra506/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://movieapi.jean-francoispayet.fr/api';
 
 // Variables pour la gestion de l'édition du titre du film
 let selectedMovieId = ref('')

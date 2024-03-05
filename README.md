@@ -1,5 +1,8 @@
 # wr505-crud-vuejs (App Movie - Coté Front)
 
+## URL du projet
+### https://movie.jean-francoispayet.fr/
+
 ## Initialisation du projet
 
 ```sh
